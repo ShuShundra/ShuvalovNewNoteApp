@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NoteApp;
 using System.Windows.Forms;
 
 namespace ShuvalovNewNoteAppUI
@@ -15,6 +16,11 @@ namespace ShuvalovNewNoteAppUI
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
