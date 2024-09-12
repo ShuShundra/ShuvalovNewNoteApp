@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using NoteApp;
-using System.Windows.Forms;
 
-namespace NoteAppUI
+namespace NoteApp
 {
-    static class Program1
+    class ПримерИспользования
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            
             var менеджер = new МенеджерПроекта();
             var проект = менеджер.ЗагрузитьПроект();
 
@@ -31,9 +25,7 @@ namespace NoteAppUI
             {
                 Console.WriteLine($"[{заметка.Категория}] {заметка.Название}: {заметка.Текст} (Создано: {заметка.ВремяСоздания})");
             }
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
         }
     }
+
 }
