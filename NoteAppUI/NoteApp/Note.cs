@@ -6,48 +6,69 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    public enum КатегорияЗаметки
+    public enum NoteCategory
     {
-        Работа,
-        Дом,
-        ЗдоровьеИСпорт,
-        Люди,
-        Документы,
-        Финансы,
-        Разное
+        Job,
+        Home,
+        Health,
+        People,
+        Documents,
+        Finance,
+        Other
     }
           
-    public class Заметка : ICloneable
+    public class Note : ICloneable
     {
-        private string название;
-        private readonly DateTime времяСоздания;
-        private DateTime времяПоследнегоИзменения;
-
-        public string Название
+        /// <summary>
+        /// Название заметки
+        /// </summary>
+        private string noteName;
+        private readonly DateTime creationTime;
+        private DateTime lastChanged;
+        /// <summary>
+        /// Свойство "имя"
+        /// </summary>
+        public string Name
         {
-            get => название;
+            get => noteName;
+            /// <summary>
+            /// Изменить название заметки и время
+            /// </summary>
             set
             {
                 if (value.Length > 50)
                     throw new ArgumentException("Название не может превышать 50 символов.");
-                название = value;
-                времяПоследнегоИзменения = DateTime.Now;
+                noteName = value;
+                lastChanged = DateTime.Now;
             }
         }
+        /// <summary>
+        /// Категория заметки
+        /// </summary>
+        public NoteCategory Category { get; set; }
+        /// <summary>
+        /// текст заметки
+        /// </summary>
+        public string Text { get; set; }
+        /// <summary>
+        /// Время создания заметки
+        /// </summary>
+        public DateTime CreationTime => creationTime;
+        /// <summary>
+        /// Время последнего изменения заметки
+        /// </summary>
+        public DateTime LastChangedTime => lastChanged;
 
-        public КатегорияЗаметки Категория { get; set; }
-        public string Текст { get; set; }
-
-        public DateTime ВремяСоздания => времяСоздания;
-        public DateTime ВремяПоследнегоИзменения => времяПоследнегоИзменения;
-
-        public Заметка(string название = "Без названия", КатегорияЗаметки категория = КатегорияЗаметки.Разное, string текст = "")
+        /// <summary>
+        /// Конструктор заметки: название, категория, [текст]
+        /// </summary>
+        public Note(string name = "Без названия", NoteCategory category = NoteCategory.Other, string text = "")
         {
-            Название = название;
-            Категория = категория;
-            Текст = текст;
-            времяСоздания = DateTime.Now;
-            времяПоследнегоИзменения = времяСоздания;
+            Name = name;
+            Category = category;
+            Text = text;
+            creationTime = DateTime.Now;
+            lastChanged = creationTime;
         }
 
         public object Clone()

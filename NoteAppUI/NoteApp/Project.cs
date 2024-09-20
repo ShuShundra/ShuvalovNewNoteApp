@@ -8,23 +8,38 @@ namespace NoteApp
 {
     using System.Collections.Generic;
 
-    public class Проект
+    /// <summary>
+    /// Класс проект, содержит заметки
+    /// </summary>
+    public class Project
     {
-        public List<Заметка> Заметки { get; private set; }
+        /// <summary>
+        /// Список заметок
+        /// </summary>
+        public List<Note> Notes { get; private set; }
 
-        public Проект()
+
+        /// <summary>
+        /// Конструтор проекта
+        /// </summary>
+        public Project()
         {
-            Заметки = new List<Заметка>();
+            Notes = new List<Note>();
         }
 
-        public void ДобавитьЗаметку(Заметка заметка)
+        /// <summary>
+        /// Добавить заметку в проект
+        /// </summary>
+        public void AddNote(Note note)
         {
-            Заметки.Add(заметка);
+            Notes.Add(note);
         }
-
-        public void УдалитьЗаметку(Заметка заметка)
+        /// <summary>
+        /// Удалить заметку из проекта
+        /// </summary>
+        public void DeleteNote(Note note)
         {
-            Заметки.Remove(заметка);
+            Notes.Remove(note);
         }
     }
 }

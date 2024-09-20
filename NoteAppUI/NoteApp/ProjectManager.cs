@@ -8,18 +8,26 @@ using Newtonsoft.Json;
 
 namespace NoteApp
 {
-      public class МенеджерПроекта
+      public class ProjectManager
     {
-        private const string ПутьФайла = @"C:\Users\Shuvalov\Documents\NoteApp.notes"; // Замените на ваш путь в системе
-
-        public void СохранитьПроект(Проект проект)
+        private string filePath = @"C:\Users\Shuvalov\Documents\NoteApp\NoteApp.notes"; // Путь к приложению
+        /// <summary>
+        /// Путь к файлу проекта
+        /// </summary>
+        public string Filepath => filePath;
+        /// <summary>
+        /// Сохранить проект 
+        /// </summary>
+        public void SaveProject(Project project)
         {
-            JsonSerializerHelper.SaveToFile(проект, ПутьФайла);
+            JsonSerializerHelper.SaveToFile(project, filePath);
         }
-
-        public Проект ЗагрузитьПроект()
+        /// <summary>
+        /// Загрузить проект 
+        /// </summary>
+        public Project LoadProject()
         {
-            return JsonSerializerHelper.LoadFromFile<Проект>(ПутьФайла) ?? new Проект();
+            return JsonSerializerHelper.LoadFromFile(filePath) ?? new Project();
         }
     }
 

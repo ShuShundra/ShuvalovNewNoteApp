@@ -1,47 +1,66 @@
-﻿namespace NoteAppUI
+﻿using System;
+using System.Windows.Forms;
+using NoteApp;
+
+namespace NoteAppUI
 {
-    partial class Form1
+    /// <summary>
+    /// Создана для демонстрации 
+    /// </summary>
+    public partial class Form1 : Form
     {
         /// <summary>
-        /// Required designer variable.
+        /// поле класса формы 1 для хранения пути к файлу
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
-                /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region Windows Form Designer generated code
-
+        private const string FilePath = @"C:\Users\Shuvalov\Documents\NoteApp\note.json"; // Путь к файлу для сохранения заметки
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Обработчик события нажатия кнопки сохранить
         /// </summary>
-        private void InitializeComponent()
+        private void saveButton_Click(object sender, EventArgs e)
         {
-            this.SuspendLayout();
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 509);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
+            var note = new Note
+            {
+                Name = titleTextBox.Text,
+                Text = contentTextBox.Text
+            };
+            var project = new Project
+            {
+            };
+            project.AddNote(note);
 
+            try
+            {
+                JsonSerializerHelper.SaveToFile(project, FilePath);
+                MessageBox.Show("Заметка сохранена!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
+            }
+        }
+        /// <summary>
+        /// Обработчик события нажатия кнопки загрузить
+        /// </summary>
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var project = JsonSerializerHelper.LoadFromFile(FilePath);
+                var note = project.Notes[0];
+                titleTextBox.Text = note.Name;
+                contentTextBox.Text = note.Text;
+                dateLabel.Text = $"Дата создания: {note.CreationTime}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке: {ex.Message}");
+            }
         }
 
-        #endregion
+        private TextBox titleTextBox;
+        private TextBox contentTextBox;
+        private Button saveButton;
+        private Button loadButton;
+        private Label dateLabel;
     }
 }
-
