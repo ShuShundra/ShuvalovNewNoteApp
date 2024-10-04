@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NoteApp
+namespace note
 {
     using System.Collections.Generic;
 
@@ -16,7 +16,7 @@ namespace NoteApp
         /// <summary>
         /// Список заметок
         /// </summary>
-        public List<Note> Notes { get; private set; }
+        public List<Note> notes { get; private set; }
 
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace NoteApp
         /// </summary>
         public Project()
         {
-            Notes = new List<Note>();
+            notes = new List<Note>();
         }
 
         /// <summary>
@@ -32,14 +32,21 @@ namespace NoteApp
         /// </summary>
         public void AddNote(Note note)
         {
-            Notes.Add(note);
+            notes.Add(note);
+        }
+        /// <summary>
+        /// Редактировать заметку
+        /// </summary>
+        public void EditNote(Note note)
+        {
+            notes.Add(note);
         }
         /// <summary>
         /// Удалить заметку из проекта
         /// </summary>
         public void DeleteNote(Note note)
         {
-            Notes.Remove(note);
+            notes.Remove(note);
         }
     }
 }

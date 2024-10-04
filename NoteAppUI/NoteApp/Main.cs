@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NoteApp
+namespace note
 {
     class ПримерИспользования
     {
@@ -21,7 +21,7 @@ namespace NoteApp
             менеджер.SaveProject(проект);
 
             // Вывод всех заметок
-            foreach (var заметка in проект.Notes)
+            foreach (var заметка in проект.notes)
             {
                 Console.WriteLine($"[{заметка.Category}] {заметка.Name}: {заметка.Text} (Создано: {заметка.CreationTime})");
             }

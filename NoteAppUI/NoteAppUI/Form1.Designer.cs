@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using NoteApp;
+using note;
 
 namespace NoteAppUI
 {
@@ -46,7 +46,7 @@ namespace NoteAppUI
             try
             {
                 var project = JsonSerializerHelper.LoadFromFile(FilePath);
-                var note = project.Notes[0];
+                var note = project.notes[0];
                 titleTextBox.Text = note.Name;
                 contentTextBox.Text = note.Text;
                 dateLabel.Text = $"Дата создания: {note.CreationTime}";
