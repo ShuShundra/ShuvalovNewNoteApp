@@ -14,14 +14,13 @@ namespace NoteAppUI
     {
         public AddEditForm()
         {
-            Note = new note.Note();
+            noteValue = new note.Note();
             InitializeComponent();
 
             foreach (var value in note.NoteCategory.GetValues(typeof(note.NoteCategory)))
             {
                 categoryValue.Items.Add(value);
             }
-            categoryValue.SelectedIndex = 0;
             // Make button1's dialog result OK.
             okButton.DialogResult = DialogResult.OK;
             // Make button2's dialog result Cancel.
@@ -35,7 +34,7 @@ namespace NoteAppUI
 
         private void noteTextValue_TextChanged(object sender, EventArgs e)
         {
-            Note.Name = noteTextValue.Text;
+            Note.Text = noteTextValue.Text;
         }
 
         private void categoryValue_SelectedIndexChanged(object sender, EventArgs e)

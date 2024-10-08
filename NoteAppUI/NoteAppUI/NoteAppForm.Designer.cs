@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
+        note.ProjectManager pm;
         note.Project project;
 
-        public void InitializeProject()
+        private void InitializeProject()
         {
-            note.ProjectManager pm = new note.ProjectManager();
             project = pm.LoadProject();
         }
 
@@ -70,6 +70,7 @@
             this.noteList.Name = "noteList";
             this.noteList.Size = new System.Drawing.Size(170, 244);
             this.noteList.TabIndex = 0;
+            this.noteList.SelectedIndexChanged += new System.EventHandler(this.noteList_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -134,6 +135,7 @@
             // 
             // creationDate
             // 
+            this.creationDate.Enabled = false;
             this.creationDate.Location = new System.Drawing.Point(258, 88);
             this.creationDate.Margin = new System.Windows.Forms.Padding(2);
             this.creationDate.Name = "creationDate";
@@ -142,6 +144,7 @@
             // 
             // modificationDate
             // 
+            this.modificationDate.Enabled = false;
             this.modificationDate.Location = new System.Drawing.Point(479, 88);
             this.modificationDate.Margin = new System.Windows.Forms.Padding(2);
             this.modificationDate.Name = "modificationDate";
@@ -250,6 +253,7 @@
             this.editButton.TabIndex = 12;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // removeButton
             // 
@@ -261,6 +265,7 @@
             this.removeButton.TabIndex = 13;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // noteAppForm
             // 
@@ -285,6 +290,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "noteAppForm";
             this.Text = "NoteApp";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.noteAppForm_FormClosing);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.ResumeLayout(false);

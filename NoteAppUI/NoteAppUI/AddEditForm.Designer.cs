@@ -2,7 +2,20 @@
 {
     partial class AddEditForm
     {
-        public note.Note Note { get; set; }
+        private note.Note noteValue;
+        public note.Note Note
+        {
+            get => noteValue;
+            set
+            {
+                noteValue = value;
+                noteTitleValue.Text = noteValue.Name;
+                noteTextValue.Text = noteValue.Text;
+                categoryValue.SelectedItem = noteValue.Category;
+                createdDateValue.Value = noteValue.CreationTime;
+                modifiedDateValue.Value = noteValue.LastChangedTime;
+            }
+        }
 
         /// <summary>
         /// Required designer variable.
@@ -31,7 +44,7 @@
         private void InitializeComponent()
         {
             this.titleLabel = new System.Windows.Forms.Label();
-            this.categoryLabe = new System.Windows.Forms.Label();
+            this.categoryLabel = new System.Windows.Forms.Label();
             this.createdLabel = new System.Windows.Forms.Label();
             this.noteTextValue = new System.Windows.Forms.TextBox();
             this.categoryValue = new System.Windows.Forms.ComboBox();
@@ -51,21 +64,21 @@
             this.titleLabel.AutoSize = true;
             this.titleLabel.Location = new System.Drawing.Point(3, 12);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(77, 17);
+            this.titleLabel.Size = new System.Drawing.Size(76, 17);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "Title";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // categoryLabe
+            // categoryLabel
             // 
-            this.categoryLabe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.categoryLabe.AutoSize = true;
-            this.categoryLabe.Location = new System.Drawing.Point(3, 54);
-            this.categoryLabe.Name = "categoryLabe";
-            this.categoryLabe.Size = new System.Drawing.Size(77, 17);
-            this.categoryLabe.TabIndex = 1;
-            this.categoryLabe.Text = "Category";
-            this.categoryLabe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.categoryLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.categoryLabel.AutoSize = true;
+            this.categoryLabel.Location = new System.Drawing.Point(3, 54);
+            this.categoryLabel.Name = "categoryLabel";
+            this.categoryLabel.Size = new System.Drawing.Size(76, 17);
+            this.categoryLabel.TabIndex = 1;
+            this.categoryLabel.Text = "Category";
+            this.categoryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // createdLabel
             // 
@@ -73,7 +86,7 @@
             this.createdLabel.AutoSize = true;
             this.createdLabel.Location = new System.Drawing.Point(3, 99);
             this.createdLabel.Name = "createdLabel";
-            this.createdLabel.Size = new System.Drawing.Size(77, 17);
+            this.createdLabel.Size = new System.Drawing.Size(76, 17);
             this.createdLabel.TabIndex = 2;
             this.createdLabel.Text = "Created";
             this.createdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -93,7 +106,7 @@
             this.categoryValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.categoryValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryValue.FormattingEnabled = true;
-            this.categoryValue.Location = new System.Drawing.Point(86, 50);
+            this.categoryValue.Location = new System.Drawing.Point(85, 50);
             this.categoryValue.Name = "categoryValue";
             this.categoryValue.Size = new System.Drawing.Size(121, 24);
             this.categoryValue.TabIndex = 4;
@@ -103,16 +116,16 @@
             // 
             this.createdDateValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.createdDateValue.Enabled = false;
-            this.createdDateValue.Location = new System.Drawing.Point(86, 97);
+            this.createdDateValue.Location = new System.Drawing.Point(85, 97);
             this.createdDateValue.Name = "createdDateValue";
-            this.createdDateValue.Size = new System.Drawing.Size(272, 22);
+            this.createdDateValue.Size = new System.Drawing.Size(271, 22);
             this.createdDateValue.TabIndex = 5;
             // 
             // modifiedLabel
             // 
             this.modifiedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.modifiedLabel.AutoSize = true;
-            this.modifiedLabel.Location = new System.Drawing.Point(364, 99);
+            this.modifiedLabel.Location = new System.Drawing.Point(362, 99);
             this.modifiedLabel.Name = "modifiedLabel";
             this.modifiedLabel.Size = new System.Drawing.Size(71, 17);
             this.modifiedLabel.TabIndex = 6;
@@ -123,9 +136,9 @@
             // 
             this.modifiedDateValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.modifiedDateValue.Enabled = false;
-            this.modifiedDateValue.Location = new System.Drawing.Point(441, 97);
+            this.modifiedDateValue.Location = new System.Drawing.Point(439, 97);
             this.modifiedDateValue.Name = "modifiedDateValue";
-            this.modifiedDateValue.Size = new System.Drawing.Size(318, 22);
+            this.modifiedDateValue.Size = new System.Drawing.Size(320, 22);
             this.modifiedDateValue.TabIndex = 7;
             // 
             // okButton
@@ -149,9 +162,9 @@
             // noteTitleValue
             // 
             this.noteTitleValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.noteTitleValue.Location = new System.Drawing.Point(86, 10);
+            this.noteTitleValue.Location = new System.Drawing.Point(85, 10);
             this.noteTitleValue.Name = "noteTitleValue";
-            this.noteTitleValue.Size = new System.Drawing.Size(272, 22);
+            this.noteTitleValue.Size = new System.Drawing.Size(271, 22);
             this.noteTitleValue.TabIndex = 10;
             this.noteTitleValue.TextChanged += new System.EventHandler(this.noteTitleValue_TextChanged);
             // 
@@ -161,10 +174,10 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.92818F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.07182F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 323F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 325F));
             this.tableLayoutPanel1.Controls.Add(this.titleLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.noteTitleValue, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.categoryLabe, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.categoryLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.modifiedDateValue, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.categoryValue, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.modifiedLabel, 2, 2);
@@ -200,7 +213,7 @@
         #endregion
 
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Label categoryLabe;
+        private System.Windows.Forms.Label categoryLabel;
         private System.Windows.Forms.Label createdLabel;
         private System.Windows.Forms.TextBox noteTextValue;
         private System.Windows.Forms.ComboBox categoryValue;

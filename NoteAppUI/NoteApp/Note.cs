@@ -23,6 +23,8 @@ namespace note
         /// Название заметки
         /// </summary>
         private string noteName;
+        private NoteCategory noteCategory;
+        private string noteText;
         private readonly DateTime creationTime;
         private DateTime lastChanged;
         /// <summary>
@@ -45,11 +47,27 @@ namespace note
         /// <summary>
         /// Категория заметки
         /// </summary>
-        public NoteCategory Category { get; set; }
+        public NoteCategory Category
+        {
+            get => noteCategory;
+            set
+            {
+                noteCategory = value;
+                lastChanged = DateTime.Now;
+            }
+        }
         /// <summary>
         /// текст заметки
         /// </summary>
-        public string Text { get; set; }
+        public string Text
+        {
+            get => noteText;
+            set
+            {
+                noteText = value;
+                lastChanged = DateTime.Now;
+            }
+        }
         /// <summary>
         /// Время создания заметки
         /// </summary>
