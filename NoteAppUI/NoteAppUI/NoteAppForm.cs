@@ -51,7 +51,7 @@ namespace NoteAppUI
             updateNoteList();
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        void addNoteFunction()
         {
             var addEditForm = new AddEditForm();
             if (addEditForm.ShowDialog() == DialogResult.OK)
@@ -61,28 +61,66 @@ namespace NoteAppUI
             updateNoteList();
         }
 
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            addNoteFunction();
+        }
+
+        private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            addNoteFunction();
+        }
+
         private void noteAppForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             pm.SaveProject(project);
         }
 
-        private void editButton_Click(object sender, EventArgs e)
+        void editNoteFunction()
         {
             var addEditForm = new AddEditForm();
-            int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
-            addEditForm.Note = project.notes.Where((i) => i.Name == noteList.SelectedItem.ToString()).First();
-            if (addEditForm.ShowDialog() == DialogResult.OK)
+            if (noteList.SelectedItems.Count > 0)
             {
-                project.notes[index] = addEditForm.Note;
+                int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
+                addEditForm.Note = project.notes.Where((i) => i.Name == noteList.SelectedItem.ToString()).First();
+                if (addEditForm.ShowDialog() == DialogResult.OK)
+                {
+                    project.notes[index] = addEditForm.Note;
+                }
+                updateNoteList();
             }
-            updateNoteList();
+
         }
+        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editNoteFunction();
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            editNoteFunction();
+        }
+
+        void removeNoteFunction()
+        {
+            if (noteList.SelectedItems.Count > 0)
+            {
+                int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
+                project.notes.RemoveAt(index);
+                updateNoteList();
+            }
+        }
+
+
+        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            removeNoteFunction();
+        }
+
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
-            project.notes.RemoveAt(index);
-            updateNoteList();
+            removeNoteFunction();
         }
 
         private void noteList_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,7 +129,11 @@ namespace NoteAppUI
             {
                 int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
                 noteText.Text = project.notes[index].Text;
+                creationDate.Value = project.notes[index].CreationTime;
+                modificationDate.Value = project.notes[index].LastChangedTime;
             }
         }
+
+       
     }
 }

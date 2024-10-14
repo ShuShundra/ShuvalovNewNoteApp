@@ -17,7 +17,7 @@ namespace note
         Other
     }
           
-    public class Note : ICloneable
+    public class Note
     {
         /// <summary>
         /// Название заметки
@@ -25,7 +25,7 @@ namespace note
         private string noteName;
         private NoteCategory noteCategory;
         private string noteText;
-        private readonly DateTime creationTime;
+        private DateTime creationTime;
         private DateTime lastChanged;
         /// <summary>
         /// Свойство "имя"
@@ -71,11 +71,26 @@ namespace note
         /// <summary>
         /// Время создания заметки
         /// </summary>
-        public DateTime CreationTime => creationTime;
+        public DateTime CreationTime
+        {
+            get => creationTime;
+            set
+            {
+                creationTime = value;
+                lastChanged = DateTime.Now;
+            }
+        }
         /// <summary>
         /// Время последнего изменения заметки
         /// </summary>
-        public DateTime LastChangedTime => lastChanged;
+        public DateTime LastChangedTime
+        {
+            get => lastChanged;
+            set
+            {
+                lastChanged = value;
+            }
+        }
 
         /// <summary>
         /// Конструктор заметки: название, категория, [текст]
@@ -87,11 +102,6 @@ namespace note
             Text = text;
             creationTime = DateTime.Now;
             lastChanged = creationTime;
-        }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
         }
     }
 }
