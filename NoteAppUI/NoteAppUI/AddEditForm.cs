@@ -16,6 +16,7 @@ namespace NoteAppUI
         {
             noteValue = new note.Note();
             InitializeComponent();
+            noteTitleValue.MaxLength = 15;
 
             foreach (var value in note.NoteCategory.GetValues(typeof(note.NoteCategory)))
             {
@@ -29,7 +30,13 @@ namespace NoteAppUI
 
         private void noteTitleValue_TextChanged(object sender, EventArgs e)
         {
-            Note.Name = noteTitleValue.Text;
+            try {
+                Note.Name = noteTitleValue.Text;
+            }
+            catch (ArgumentException ex) {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void noteTextValue_TextChanged(object sender, EventArgs e)

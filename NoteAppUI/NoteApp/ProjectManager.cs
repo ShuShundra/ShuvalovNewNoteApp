@@ -10,11 +10,19 @@ namespace note
 {
       public class ProjectManager
     {
-        private string filePath = @"C:\Users\Shuvalov\Documents\NoteApp\NoteApp.notes"; // Путь к приложению
+        private string filePath = @""; // Путь к приложению
         /// <summary>
         /// Путь к файлу проекта
         /// </summary>
-        public string Filepath => filePath;
+        public string Filepath
+        {
+            get => filePath;
+            set
+            {
+                filePath = value;
+                //LoadProject();
+            }
+        }
         /// <summary>
         /// Сохранить проект 
         /// </summary>

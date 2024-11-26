@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using note;
 
 namespace NoteAppUI
@@ -46,7 +47,7 @@ namespace NoteAppUI
             }
         }
 
-            private void categoryList_SelectedIndexChanged(object sender, EventArgs e)
+        private void categoryList_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateNoteList();
         }
@@ -73,7 +74,28 @@ namespace NoteAppUI
 
         private void noteAppForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            pm.SaveProject(project);
+            if (!File.Exists(pm.Filepath))
+            {
+                DialogResult result = MessageBox.Show("Do you want to save?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.InitialDirectory = "c:\\";
+                    saveFileDialog.Filter = "Notes (*.notes) | *.notes";
+                    saveFileDialog.RestoreDirectory = true;
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        //Get the path of specified file
+                        pm.Filepath = saveFileDialog.FileName;
+                        pm.SaveProject(project);
+                    }
+                }
+            }
+            else
+            {
+                pm.SaveProject(project);
+            }
         }
 
         void editNoteFunction()
@@ -128,12 +150,39 @@ namespace NoteAppUI
             if (noteList.SelectedItems.Count > 0)
             {
                 int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
+                noteName.Text = project.notes[index].Name;
+                noteCategory.Text = project.notes[index].Category.ToString();
                 noteText.Text = project.notes[index].Text;
                 creationDate.Value = project.notes[index].CreationTime;
                 modificationDate.Value = project.notes[index].LastChangedTime;
             }
         }
 
-       
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void selectDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "Notes (*.notes) | *.notes";
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //Get the path of specified file
+                pm.Filepath = openFileDialog.FileName;
+                project = pm.LoadProject();
+                updateNoteList();
+            }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutBox1 = new AboutBox1();
+            aboutBox1.Show();
+        }
     }
 }

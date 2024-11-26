@@ -38,10 +38,14 @@ namespace note
             /// </summary>
             set
             {
-                if (value.Length > 50)
-                    throw new ArgumentException("Название не может превышать 50 символов.");
-                noteName = value;
-                lastChanged = DateTime.Now;
+                if (value.Length > 14)
+                {
+                    throw new ArgumentException("Название не может превышать 15 символов.");
+                }
+                else {
+                    noteName = value;
+                    lastChanged = DateTime.Now;
+                }
             }
         }
         /// <summary>
