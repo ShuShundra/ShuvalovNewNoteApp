@@ -30,13 +30,15 @@ namespace NoteAppUI
 
         private void noteTitleValue_TextChanged(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 Note.Name = noteTitleValue.Text;
             }
-            catch (ArgumentException ex) {
+            catch (ArgumentException ex)
+            {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void noteTextValue_TextChanged(object sender, EventArgs e)
@@ -47,6 +49,16 @@ namespace NoteAppUI
         private void categoryValue_SelectedIndexChanged(object sender, EventArgs e)
         {
             Note.Category = (note.NoteCategory)categoryValue.SelectedItem;
+        }
+
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            if (Note.Name.Length < 1)
+            {
+                this.DialogResult = DialogResult.None;               
+                MessageBox.Show("Название не может быть пустым.");
+            }
         }
     }
 }

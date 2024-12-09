@@ -99,7 +99,7 @@ namespace note
         /// <summary>
         /// Конструктор заметки: название, категория, [текст]
         /// </summary>
-        public Note(string name = "Без названия", NoteCategory category = NoteCategory.Other, string text = "")
+        public Note(string name = "", NoteCategory category = NoteCategory.Other, string text = "")
         {
             Name = name;
             Category = category;

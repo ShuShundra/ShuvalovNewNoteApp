@@ -32,6 +32,8 @@ namespace note
         /// </summary>
         public void AddNote(Note note)
         {
+            if (note.Name.Length < 1)
+                throw new ArgumentException("Нельзя добавить заметку с пустым названием.");
             notes.Add(note);
         }
         /// <summary>

@@ -127,9 +127,13 @@ namespace NoteAppUI
         {
             if (noteList.SelectedItems.Count > 0)
             {
-                int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
-                project.notes.RemoveAt(index);
-                updateNoteList();
+                DialogResult result = MessageBox.Show("Do you want to delete note?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
+                    project.notes.RemoveAt(index);
+                    updateNoteList();
+                }
             }
         }
 
