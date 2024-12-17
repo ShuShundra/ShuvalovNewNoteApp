@@ -26,6 +26,27 @@ namespace NoteAppUI
             }
             categoryList.SelectedIndex = 0;
         }
+
+        private void showNote(string currentNoteName)
+        {
+            if (noteList.SelectedItems.Count > 0 && currentNoteName.Length >0 )
+            {
+                int index = project.notes.Select(note => note.Name).ToList().IndexOf(currentNoteName);//noteList.SelectedItem.ToString());
+                noteName.Text = project.notes[index].Name;
+                noteCategory.Text = project.notes[index].Category.ToString();
+                noteText.Text = project.notes[index].Text;
+                creationDate.Value = project.notes[index].CreationTime;
+                modificationDate.Value = project.notes[index].LastChangedTime;
+            }
+            else
+            {
+                noteName.Text = null;
+                noteCategory.Text = null;
+                noteText.Text = null;
+                creationDate.Value = DateTime.Now; 
+                modificationDate.Value = DateTime.Now;
+            }
+        }
         
         private void updateNoteList()
         { 
@@ -60,6 +81,8 @@ namespace NoteAppUI
                 project.AddNote(addEditForm.Note);
             }
             updateNoteList();
+            categoryList.SelectedText = addEditForm.Note.Category.ToString();
+            showNote(addEditForm.Note.Name);
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -110,6 +133,8 @@ namespace NoteAppUI
                     project.notes[index] = addEditForm.Note;
                 }
                 updateNoteList();
+                categoryList.SelectedText = addEditForm.Note.Category.ToString();
+                showNote(addEditForm.Note.Name);
             }
 
         }
@@ -133,6 +158,7 @@ namespace NoteAppUI
                     int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
                     project.notes.RemoveAt(index);
                     updateNoteList();
+                    showNote("");
                 }
             }
         }
@@ -151,15 +177,7 @@ namespace NoteAppUI
 
         private void noteList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (noteList.SelectedItems.Count > 0)
-            {
-                int index = project.notes.Select(note => note.Name).ToList().IndexOf(noteList.SelectedItem.ToString());
-                noteName.Text = project.notes[index].Name;
-                noteCategory.Text = project.notes[index].Category.ToString();
-                noteText.Text = project.notes[index].Text;
-                creationDate.Value = project.notes[index].CreationTime;
-                modificationDate.Value = project.notes[index].LastChangedTime;
-            }
+            showNote(noteList.SelectedItem.ToString());
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
